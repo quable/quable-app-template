@@ -6,6 +6,9 @@
   "engines": {
     "node": ">=16.0.0"
   },
+  "_moduleAliases": {
+    "src": "dist"
+  },
   "scripts": {
     "build": "rimraf ./dist && tsc --build tsconfig.json",
     "lint": "npx eslint --ext .ts src/",
@@ -34,6 +37,7 @@
     "express": "^4.18.2",
     "express-ejs-layouts": "^2.5.1",
     "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
     "morgan": "^1.10.0",
     "rimraf": "^5.0.5",
     "tsconfig-paths": "^4.2.0",
