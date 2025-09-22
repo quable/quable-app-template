@@ -1,14 +1,10 @@
-import axios from 'axios';
 import { databaseService } from './database.service';
+import { QuablePimClient } from '@quable/quable-pim-js';
 class AppService {
   public checkAuthToken = async (instanceName: string, authToken: string) => {
     try {
-      await axios.get(`https://${instanceName}.quable.com/api`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
+      const quableClient = new QuablePimClient({ apiKey: authToken, instanceName })
+      await quableClient.PimApi.User.getAll({ limit: 1, type: 'api' });
       return true;
     } catch (error) {
       return false;
@@ -43,9 +39,9 @@ class AppService {
 
       instance = instance
         ? await databaseService.quableInstance.update({
-            where: { id: instance.id },
-            data: instanceData,
-          })
+          where: { id: instance.id },
+          data: instanceData,
+        })
         : await databaseService.quableInstance.create({ data: instanceData });
 
       response.message = `QuableApp installed on ${instance.name}.quable.com`;
