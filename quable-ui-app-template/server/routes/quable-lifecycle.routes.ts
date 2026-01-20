@@ -9,9 +9,11 @@ router.get('/permission', quableLifecycleController.getPermission)
 // 2: Installation - POST /install
 router.post('/install', quableLifecycleController.install)
 
-// 3 & 4: Configuration page (POST /) and Slot interaction (POST /?slot=x)
-// Both are handled by the same route, distinguished by the presence of the slot query param
-router.post('/', quableLifecycleController.handleRootPost)
+// 3: Configuration page - GET /?applicationType=x&quableInstanceName=x&...
+router.get('/', quableLifecycleController.getConfigurationPage)
+
+// 4: Slot interaction - POST /?slot=x
+router.post('/', quableLifecycleController.handleSlotInteraction)
 
 // 5: Get session by ID - displays stored slot session parameters
 router.get('/api/session/:id', quableLifecycleController.getSession)

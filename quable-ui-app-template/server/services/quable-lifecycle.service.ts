@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-import { v4 as uuidv4 } from 'uuid'
 
 const prisma = new PrismaClient()
 
@@ -31,6 +30,14 @@ interface SlotInteractionParams {
 
 interface SlotResponse {
   url: string
+}
+
+interface ConfigurationPageParams {
+  applicationType?: string
+  quableInstanceName?: string
+  interfaceLocale?: string
+  dataLocale?: string
+  userId?: string
 }
 
 class QuableLifecycleService {
@@ -65,11 +72,11 @@ class QuableLifecycleService {
 
   /**
    * Get the configuration page HTML
+   * GET /?applicationType=x&quableInstanceName=x&interfaceLocale=x&dataLocale=x&userId=x
    * This HTML will be displayed in an iframe within the Quable PIM
    */
-  public async getConfigurationPage(_body: unknown) {
-    // Generate a session ID for this configuration session
-    const sessionId = uuidv4()
+  public async getConfigurationPage(params: ConfigurationPageParams) {
+    const { applicationType, quableInstanceName, interfaceLocale, dataLocale, userId } = params
 
     const html = `
 <!DOCTYPE html>
@@ -79,11 +86,7 @@ class QuableLifecycleService {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quable App Configuration</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -101,16 +104,8 @@ class QuableLifecycleService {
       width: 100%;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     }
-    h1 {
-      color: #333;
-      margin-bottom: 10px;
-      font-size: 24px;
-    }
-    p {
-      color: #666;
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
+    h1 { color: #333; margin-bottom: 10px; font-size: 24px; }
+    p { color: #666; margin-bottom: 20px; line-height: 1.6; }
     .status {
       display: flex;
       align-items: center;
@@ -119,24 +114,29 @@ class QuableLifecycleService {
       background: #e8f5e9;
       border-radius: 8px;
       color: #2e7d32;
+      margin-bottom: 20px;
     }
-    .status-icon {
-      font-size: 20px;
-    }
-    .session-info {
-      margin-top: 20px;
-      padding: 15px;
+    .status-icon { font-size: 20px; }
+    .info-section {
       background: #f5f5f5;
       border-radius: 8px;
-      font-size: 14px;
-      color: #666;
+      padding: 20px;
     }
-    .session-info code {
-      background: #e0e0e0;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-family: monospace;
+    .info-section h2 {
+      font-size: 12px;
+      color: #999;
+      text-transform: uppercase;
+      margin-bottom: 15px;
     }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-row .label { color: #666; font-size: 13px; }
+    .info-row .value { color: #333; font-size: 13px; font-family: monospace; }
   </style>
 </head>
 <body>
@@ -147,8 +147,28 @@ class QuableLifecycleService {
       <span class="status-icon">✓</span>
       <span>Application is active</span>
     </div>
-    <div class="session-info">
-      <strong>Session ID:</strong> <code>${sessionId}</code>
+    <div class="info-section">
+      <h2>Configuration Parameters</h2>
+      <div class="info-row">
+        <span class="label">Application Type</span>
+        <span class="value">${applicationType || '-'}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Instance</span>
+        <span class="value">${quableInstanceName || '-'}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Interface Locale</span>
+        <span class="value">${interfaceLocale || '-'}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Data Locale</span>
+        <span class="value">${dataLocale || '-'}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">User ID</span>
+        <span class="value">${userId || '-'}</span>
+      </div>
     </div>
   </div>
 </body>

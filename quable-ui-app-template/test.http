@@ -19,24 +19,9 @@ Content-Type: {{contentType}}
 {}
 
 ### 3. Configuration Page (Quable Lifecycle)
-# POST / - Returns HTML content to be displayed in the Quable PIM iframe
-POST {{host}}/
-Content-Type: {{contentType}}
-
-{
-  "instance": {
-    "name": "test-instance",
-    "url": "https://test-instance.quable.com"
-  },
-  "user": {
-    "id": "user-123",
-    "email": "user@example.com"
-  },
-  "locale": {
-    "interface": "en-US",
-    "data": "fr_FR"
-  }
-}
+# GET / - Returns HTML content to be displayed in the Quable PIM iframe
+# Parameters are passed as query params
+GET {{host}}/?applicationType=AppStore&quableInstanceName=quable-memento&interfaceLocale=en-US&dataLocale=en_US&userId=51
 
 ### 4a. Slot Interaction - Single Document Action
 # POST /?slot=document.action.single - Action on a single document

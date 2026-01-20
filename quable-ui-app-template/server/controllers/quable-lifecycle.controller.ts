@@ -41,20 +41,59 @@ class QuableLifecycleController {
   }
 
   /**
-   * Point 3 & 4: Root POST handler
-   * POST / - Configuration page (returns HTML)
-   * POST /?slot=x - Slot interaction (returns JSON with URL)
+   * Point 3: Configuration page
+   * GET /?applicationType=x&quableInstanceName=x&interfaceLocale=x&dataLocale=x&userId=x
+   * Returns HTML content to be displayed in the Quable PIM iframe
    */
-  public handleRootPost = async (req: Request, res: Response) => {
-    const slot = req.query.slot as string | undefined
+  public getConfigurationPage = async (req: Request, res: Response) => {
+    const { applicationType, quableInstanceName, interfaceLocale, dataLocale, userId } = req.query
 
-    if (slot) {
-      // 4: Slot interaction
-      return this.handleSlotInteraction(req, res, slot)
-    } else {
-      // 3: Configuration page
-      return this.handleConfigurationPage(req, res)
-    }
+    console.log('Configuration page request received:', {
+      applicationType,
+      quableInstanceName,
+      interfaceLocale,
+      dataLocale,
+      userId,
+    })
+
+    const result = await quableLifecycleService.getConfigurationPage({
+      applicationType: applicationType as string,
+      quableInstanceName: quableInstanceName as string,
+      interfaceLocale: interfaceLocale as string,
+      dataLocale: dataLocale as string,
+      userId: userId as string,
+    })
+
+    res.setHeader('Content-Type', 'text/html')
+    return res.status(200).send(result.html)
+  }
+
+  /**
+   * Point 4: Slot interaction
+   * POST /?slot=x
+   * Returns JSON with URL to be opened by the PIM
+   */
+  public handleSlotInteraction = async (req: Request, res: Response) => {
+    const slot = req.query.slot as string
+
+    console.log('Slot interaction request received:', {
+      slot,
+      body: req.body,
+      headers: {
+        'client-id': req.headers['client-id'],
+        referer: req.headers['referer'],
+      },
+    })
+
+    const result = await quableLifecycleService.handleSlotInteraction({
+      slot,
+      instance: req.body?.instance,
+      user: req.body?.user,
+      object: req.body?.object,
+      locale: req.body?.locale,
+    })
+
+    return res.status(200).json(result)
   }
 
   /**
@@ -496,56 +535,6 @@ class QuableLifecycleController {
 </body>
 </html>
     `.trim()
-  }
-
-  /**
-   * Point 3: Configuration page
-   * POST /
-   * Returns HTML content to be displayed in the Quable PIM iframe
-   */
-  private handleConfigurationPage = async (req: Request, res: Response) => {
-    console.log('Configuration page request received:', {
-      body: req.body,
-      headers: {
-        'client-id': req.headers['client-id'],
-        referer: req.headers['referer'],
-      },
-    })
-
-    const result = await quableLifecycleService.getConfigurationPage(req.body)
-
-    res.setHeader('Content-Type', 'text/html')
-    return res.status(200).send(result.html)
-  }
-
-  /**
-   * Point 4: Slot interaction
-   * POST /?slot=x
-   * Returns JSON with URL to be opened by the PIM
-   */
-  private handleSlotInteraction = async (
-    req: Request,
-    res: Response,
-    slot: string,
-  ) => {
-    console.log('Slot interaction request received:', {
-      slot,
-      body: req.body,
-      headers: {
-        'client-id': req.headers['client-id'],
-        referer: req.headers['referer'],
-      },
-    })
-
-    const result = await quableLifecycleService.handleSlotInteraction({
-      slot,
-      instance: req.body?.instance,
-      user: req.body?.user,
-      object: req.body?.object,
-      locale: req.body?.locale,
-    })
-
-    return res.status(200).json(result)
   }
 }
 
