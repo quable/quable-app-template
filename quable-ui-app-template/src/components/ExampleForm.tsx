@@ -13,9 +13,9 @@ export function ExampleForm() {
   })
 
   const categories = [
-    { label: t('exampleForm.categories.products'), value: 'products' },
-    { label: t('exampleForm.categories.documents'), value: 'documents' },
-    { label: t('exampleForm.categories.assets'), value: 'assets' },
+    { displayedValue: t('exampleForm.categories.products'), value: 'products', key: 'products' },
+    { displayedValue: t('exampleForm.categories.documents'), value: 'documents', key: 'documents' },
+    { displayedValue: t('exampleForm.categories.assets'), value: 'assets', key: 'assets' },
   ]
 
   const handleSubmit = (e: React.FormEvent) => {
