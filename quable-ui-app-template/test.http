@@ -1,32 +1,116 @@
 ### Variables
 @host = http://localhost:4000
-@apiBase = {{host}}/api
 @contentType = application/json
 
-### Test 1: Get Quable PIM Permissions
-GET {{apiBase}}/permission
+###############################################################################
+# QUABLE LIFECYCLE ROUTES (root level - as per Quable spec)
+###############################################################################
 
-### Test 2: Get Quable PIM Scope (Alternative endpoint)
-GET {{apiBase}}/quable-pim-scope
+### 1. Get Permission (Quable Lifecycle)
+# Returns the permissions required by the app (e.g., ["read_access"] or ["full_access"])
+GET {{host}}/permission
 
-### Test 3: Install App
-POST {{apiBase}}/install
+### 2. Install App (Quable Lifecycle)
+# Called when the app is installed on a Quable instance
+# Parameters are passed as query params
+POST {{host}}/install?quableInstanceName=test-instance&interfaceLocale=en-US&dataLocale=fr_FR
+Content-Type: {{contentType}}
+
+{}
+
+### 3. Configuration Page (Quable Lifecycle)
+# POST / - Returns HTML content to be displayed in the Quable PIM iframe
+POST {{host}}/
 Content-Type: {{contentType}}
 
 {
-  "quableInstanceName": "test-instance",
-  "dataLocale": "en_US",
-  "interfaceLocale": "en",
-  "userId": "user-123"
+  "instance": {
+    "name": "test-instance",
+    "url": "https://test-instance.quable.com"
+  },
+  "user": {
+    "id": "user-123",
+    "email": "user@example.com"
+  },
+  "locale": {
+    "interface": "en-US",
+    "data": "fr_FR"
+  }
 }
 
-### Test 4: Launch Document App
-POST {{apiBase}}/launch
+### 4a. Slot Interaction - Single Document Action
+# POST /?slot=document.action.single - Action on a single document
+POST {{host}}/?slot=document.action.single
 Content-Type: {{contentType}}
 
 {
-  "documentId": "doc-456",
-  "documentType": "product",
-  "mode": "edit",
-  "quableInstanceName": "test-instance"
+  "instance": {
+    "name": "test-instance",
+    "url": "https://test-instance.quable.com"
+  },
+  "user": {
+    "email": "user@example.com",
+    "admin": true
+  },
+  "object": {
+    "type": "product",
+    "ids": ["doc-456"]
+  },
+  "locale": {
+    "data": "fr_FR",
+    "interface": "en-US"
+  }
 }
+
+### 4b. Slot Interaction - Bulk Document Action
+# POST /?slot=document.action.bulk - Action on multiple documents
+POST {{host}}/?slot=document.action.bulk
+Content-Type: {{contentType}}
+
+{
+  "instance": {
+    "name": "test-instance",
+    "url": "https://test-instance.quable.com"
+  },
+  "user": {
+    "email": "user@example.com",
+    "admin": true
+  },
+  "object": {
+    "type": "product",
+    "ids": ["doc-456", "doc-789", "doc-101"]
+  },
+  "locale": {
+    "data": "fr_FR",
+    "interface": "en-US"
+  }
+}
+
+### 4c. Slot Interaction - Document Page Tab
+# POST /?slot=document.page.tab - Tab in document page
+POST {{host}}/?slot=document.page.tab
+Content-Type: {{contentType}}
+
+{
+  "instance": {
+    "name": "test-instance",
+    "url": "https://test-instance.quable.com"
+  },
+  "user": {
+    "email": "user@example.com",
+    "admin": false
+  },
+  "object": {
+    "type": "product",
+    "ids": ["doc-456"]
+  },
+  "locale": {
+    "data": "fr_FR",
+    "interface": "en-US"
+  }
+}
+
+### 5. Get Session (displays stored parameters from slot interaction)
+# Replace {sessionId} with the ID returned from the slot interaction above
+# Example: GET {{host}}/api/session/550e8400-e29b-41d4-a716-446655440000
+GET {{host}}/api/session/{sessionId}

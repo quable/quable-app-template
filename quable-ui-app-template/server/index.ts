@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url'
 import { dirname } from 'path'
 import { setupAppConfig } from './config.js'
 import { sessionMiddleware } from './middlewares/session.middleware.js'
-import appRouter from './routes/app.routes.js'
+import quableLifecycleRouter from './routes/quable-lifecycle.routes.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -27,8 +27,8 @@ async function bootstrapApp() {
   app.use(morgan('dev'))
   app.use(sessionMiddleware)
 
-  // API Routes
-  app.use('/api', appRouter)
+  // Quable App Lifecycle Routes (at root level as per Quable spec)
+  app.use('/', quableLifecycleRouter)
 
   // Serve static files from the React app in production
   if (process.env.NODE_ENV === 'production') {

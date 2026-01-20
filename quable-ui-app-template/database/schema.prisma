@@ -17,3 +17,19 @@ model QuableInstance {
 
   @@map("quable_instance")
 }
+
+model SlotSession {
+  id              String   @id @default(uuid())
+  slot            String
+  instanceName    String?
+  instanceUrl     String?
+  userEmail       String?
+  userAdmin       Boolean  @default(false)
+  objectType      String?
+  objectIds       String?
+  dataLocale      String?
+  interfaceLocale String?
+  createdAt       DateTime @default(now())
+
+  @@map("slot_session")
+}
