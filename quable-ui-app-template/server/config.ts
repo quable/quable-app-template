@@ -13,7 +13,7 @@ export async function setupAppConfig(app: Application) {
     const fileContent = readFileSync(configPath, 'utf8')
     const config = parse(fileContent)
 
-    app.set('quable_pim_scope', config.quable_pim_scope)
+    app.set('quable_pim_scope', config.quable_pim_scope || ['full_access'])
 
     console.log('App config loaded successfully')
   } catch (error) {

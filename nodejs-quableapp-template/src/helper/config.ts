@@ -9,4 +9,9 @@ export async function setupAppConfig(app: any) {
   Object.keys(appConf).forEach((key) => {
     app.set(key, appConf[key]);
   });
+  
+  // Set default permissions for Quable PIM scope
+  if (!app.get('quable_pim_scope')) {
+    app.set('quable_pim_scope', ['full_access']);
+  }
 }

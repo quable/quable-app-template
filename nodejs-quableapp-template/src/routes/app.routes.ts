@@ -7,6 +7,8 @@ appRouter.get('/', appController.renderIndexPage);
 
 appRouter.get('/permission', appController.getQuablePIMScope);
 
+appRouter.get('/quable-pim-scope', appController.getQuablePIMScope);
+
 appRouter.post('/', appController.launchDocumentApp);
 
 appRouter.post('/install', appController.installApp);
