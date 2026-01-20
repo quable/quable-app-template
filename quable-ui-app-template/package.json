@@ -33,7 +33,7 @@
     "@mui/x-data-grid-pro": "^6.20.4",
     "@mui/x-date-pickers-pro": "^6.20.2",
     "@prisma/client": "^5.2.0",
-    "@quable/quable-pim-js": "^2.0.2",
+    "@quable/quable-pim-js": "latest",
     "@quable/ui": "^0.0.14",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
