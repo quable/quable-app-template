@@ -1,0 +1,32 @@
+### Variables
+@host = http://localhost:4000
+@apiBase = {{host}}/api
+@contentType = application/json
+
+### Test 1: Get Quable PIM Permissions
+GET {{apiBase}}/permission
+
+### Test 2: Get Quable PIM Scope (Alternative endpoint)
+GET {{apiBase}}/quable-pim-scope
+
+### Test 3: Install App
+POST {{apiBase}}/install
+Content-Type: {{contentType}}
+
+{
+  "quableInstanceName": "test-instance",
+  "dataLocale": "en_US",
+  "interfaceLocale": "en",
+  "userId": "user-123"
+}
+
+### Test 4: Launch Document App
+POST {{apiBase}}/launch
+Content-Type: {{contentType}}
+
+{
+  "documentId": "doc-456",
+  "documentType": "product",
+  "mode": "edit",
+  "quableInstanceName": "test-instance"
+}
