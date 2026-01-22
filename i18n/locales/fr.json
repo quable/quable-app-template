@@ -1,0 +1,139 @@
+{
+  "common": {
+    "submit": "Soumettre",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "test": "Tester",
+    "actions": "Actions",
+    "yes": "Oui",
+    "no": "Non"
+  },
+  "navigation": {
+    "appTitle": "Quable App Template v2.0",
+    "home": "Accueil",
+    "configuration": "Configuration",
+    "products": "Produits"
+  },
+  "hero": {
+    "logoAlt": "Logo Quable",
+    "description": "Application moderne avec React, @quable/ui et Next.js. Explorez les différentes pages pour découvrir les fonctionnalités.",
+    "viewStorybook": "Voir le Storybook",
+    "githubQuableUI": "GitHub @quable/ui"
+  },
+  "exampleForm": {
+    "title": "Formulaire d'exemple avec @quable/ui",
+    "description": "Ce formulaire démontre divers composants @quable/ui",
+    "fields": {
+      "name": "Nom",
+      "email": "Email",
+      "category": "Catégorie",
+      "subscribe": "S'abonner à la newsletter"
+    },
+    "categories": {
+      "products": "Produits",
+      "documents": "Documents",
+      "assets": "Ressources"
+    },
+    "submitButton": "Envoyer le formulaire",
+    "success": "Formulaire soumis ! Vérifiez la console pour les données."
+  },
+  "config": {
+    "title": "Configuration API",
+    "description": "Configurez les paramètres de connexion à votre service API externe",
+    "successMessage": "Configuration sauvegardée avec succès !",
+    "sections": {
+      "connectionInfo": "Informations de connexion",
+      "advancedSettings": "Paramètres avancés"
+    },
+    "fields": {
+      "apiUrl": "URL de l'API",
+      "apiUrlPlaceholder": "https://api.example.com",
+      "apiKey": "Clé API",
+      "apiKeyPlaceholder": "Votre clé API",
+      "apiSecret": "Secret API",
+      "apiSecretPlaceholder": "Votre secret API",
+      "environment": "Environnement",
+      "timeout": "Timeout (secondes)",
+      "retryAttempts": "Tentatives de retry",
+      "enableLogging": "Activer le logging",
+      "loggingHelp": "Enregistrer les requêtes API dans les logs",
+      "description": "Description",
+      "descriptionPlaceholder": "Description de cette configuration..."
+    },
+    "environments": {
+      "production": "Production",
+      "staging": "Staging",
+      "development": "Development"
+    },
+    "buttons": {
+      "testConnection": "Tester la connexion",
+      "saveConfiguration": "Sauvegarder la configuration"
+    },
+    "messages": {
+      "testConnection": "Test de connexion... (simulé)"
+    }
+  },
+  "products": {
+    "title": "Gestion des Produits",
+    "totalProducts": "{{count}} produits au total",
+    "newProduct": "Nouveau Produit",
+    "columns": {
+      "id": "ID",
+      "name": "Nom du produit",
+      "sku": "SKU",
+      "category": "Catégorie",
+      "price": "Prix",
+      "stock": "Stock",
+      "status": "Statut"
+    },
+    "categories": {
+      "electronics": "Électronique",
+      "clothing": "Vêtements",
+      "food": "Alimentation",
+      "home": "Maison",
+      "sports": "Sport"
+    },
+    "status": {
+      "active": "Actif",
+      "inactive": "Inactif",
+      "draft": "Brouillon"
+    },
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce produit ?",
+    "product": "Produit {{id}}",
+    "modal": {
+      "titleEdit": "Modifier le produit",
+      "titleNew": "Nouveau produit",
+      "fields": {
+        "name": "Nom du produit",
+        "namePlaceholder": "Ex: iPhone 15 Pro",
+        "sku": "SKU",
+        "skuPlaceholder": "Ex: SKU-001",
+        "category": "Catégorie",
+        "price": "Prix (€)",
+        "stock": "Quantité en stock",
+        "status": "Statut"
+      },
+      "buttons": {
+        "create": "Créer",
+        "update": "Mettre à jour"
+      }
+    }
+  },
+  "errors": {
+    "generic": "Une erreur s'est produite",
+    "required": "Ce champ est requis",
+    "invalidEmail": "Adresse email invalide",
+    "networkError": "Erreur réseau, veuillez réessayer",
+    "unauthorized": "Accès non autorisé",
+    "notFound": "Ressource introuvable",
+    "serverError": "Erreur serveur, veuillez réessayer plus tard",
+    "nameRequired": "Le nom est requis",
+    "skuRequired": "Le SKU est requis",
+    "categoryRequired": "La catégorie est requise",
+    "pricePositive": "Le prix doit être positif",
+    "stockPositive": "Le stock doit être positif"
+  }
+}

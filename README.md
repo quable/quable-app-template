@@ -1,267 +1,218 @@
-# Quable App Templates
+# Quable App Template
 
-Ce repository contient les templates d'applications pour la plateforme Quable PIM.
+A modern Next.js application template for building Quable PIM Platform applications with the [@quable/ui](https://www.npmjs.com/package/@quable/ui) component library.
 
-## Templates disponibles
+## Features
 
-### 1. nodejs-quableapp-template (Original - 2022-2023)
+- **Next.js 14** with App Router
+- **@quable/ui** - Quable's design system based on MUI v5
+- **TypeScript** for type safety
+- **Prisma ORM** for database management
+- **i18n** with react-i18next (EN/FR)
+- **API Routes** for Quable PIM lifecycle integration
+- **pnpm** for efficient package management
 
-Template traditionnel avec Express.js et EJS pour le server-side rendering.
+## Prerequisites
 
-**Technologies** :
-- Express.js + EJS
-- Bootstrap 5
-- TypeScript
-- Prisma ORM
-- JWT Authentication
+- Node.js >= 18.0.0
+- pnpm >= 9.0.0
 
-**Quand l'utiliser** :
-- Applications simples
-- Besoin de SEO important
-- Équipe non familière avec React
+## Quick Start
 
-[📁 Voir le template](./nodejs-quableapp-template/)
-
----
-
-### 2. quable-ui-app-template (Nouveau - 2026) ⭐
-
-Template moderne avec React et la bibliothèque de composants [@quable/ui](https://www.npmjs.com/package/@quable/ui).
-
-**Technologies** :
-- React 19 + TypeScript
-- @quable/ui (MUI v5)
-- Vite
-- Express.js backend
-- Prisma ORM
-- JWT Authentication
-
-**Caractéristiques** :
-- ⚛️ Architecture moderne SPA
-- 🎨 Design system cohérent avec @quable/ui
-- ⚡ Hot Module Replacement avec Vite
-- 🔐 Authentification Quable PIM intégrée
-- 📦 +20 composants UI prêts à l'emploi
-- 🚀 Expérience développeur optimale
-
-**Quand l'utiliser** :
-- Applications interactives modernes
-- Besoin de composants UI réutilisables
-- Interface utilisateur riche
-- Équipe connaissant React
-
-[📁 Voir le template](./quable-ui-app-template/) | [🚀 Guide de démarrage](./quable-ui-app-template/QUICKSTART.md)
-
----
-
-## Comparaison des templates
-
-| Critère | nodejs-quableapp-template | quable-ui-app-template |
-|---------|---------------------------|------------------------|
-| **Frontend** | EJS (SSR) | React (SPA) |
-| **UI Library** | Bootstrap 5 | @quable/ui + MUI v5 |
-| **Build Tool** | tsc | Vite |
-| **Réactivité** | Pages reloads | Single Page App |
-| **Composants** | Templates EJS | Composants React |
-| **Package Manager** | npm/yarn | pnpm |
-| **Complexité** | ⭐⭐ Simple | ⭐⭐⭐ Intermédiaire |
-| **Expérience UX** | ⭐⭐⭐ Bonne | ⭐⭐⭐⭐⭐ Excellente |
-
-[📊 Comparaison détaillée](./COMPARISON.md)
-
-## Démarrage rapide
-
-### Option 1 : Template moderne avec @quable/ui (Recommandé)
+1. **Install dependencies:**
 
 ```bash
-cd quable-ui-app-template
 pnpm install
-pnpm dev
 ```
 
-Ouvrez [http://localhost:3000](http://localhost:3000)
+2. **Configure environment variables:**
 
-[📖 Guide complet](./quable-ui-app-template/QUICKSTART.md)
-
-### Option 2 : Template classique
-
-```bash
-cd nodejs-quableapp-template
-npm install
-npm run dev
-```
-
-Ouvrez [http://localhost:4000](http://localhost:4000)
-
-## Ressources @quable/ui
-
-Le nouveau template utilise la bibliothèque [@quable/ui](https://www.npmjs.com/package/@quable/ui) développée par Quable.
-
-### Documentation et exemples
-
-- 🎨 **[Storybook interactif](https://quable-ui-storybook.web.app/)** - Explorez tous les composants
-- 📦 **[npm package](https://www.npmjs.com/package/@quable/ui)** - Installation et versions
-- 💻 **[GitHub Repository](https://github.com/quable/ui)** - Code source et issues
-
-### Composants disponibles
-
-La bibliothèque @quable/ui offre plus de 20 composants prêts à l'emploi :
-
-**Formulaires** :
-- TextField, TextArea, PasswordField
-- Select, Autocomplete
-- DateField, DateRangePicker, TimeField
-- Checkbox, Radio, Switch
-- ColorPicker, DropZone
-- RichTextEditor
-
-**Actions** :
-- Button
-- ToggleButtonGroup
-
-**Tables** :
-- TransferListInput
-
-[Voir tous les composants dans le Storybook](https://quable-ui-storybook.web.app/)
-
-## Architecture
-
-Les deux templates partagent une architecture backend similaire :
-
-```
-Backend (Express.js)
-├── Controllers     → Gèrent les requêtes HTTP
-├── Services        → Logique métier
-├── Middlewares     → Session, Auth, Logging
-├── Routes          → Définition des endpoints
-└── Helpers         → Fonctions utilitaires (JWT, etc.)
-```
-
-**Frontend** :
-
-- **nodejs-quableapp-template** : Templates EJS + CSS/JS
-- **quable-ui-app-template** : React Components + @quable/ui
-
-## Configuration Quable PIM
-
-Les deux templates incluent l'intégration Quable PIM :
-
-### fichier `quable.app.yml`
-
-```yaml
-application_type: document
-quable_pim_scope:
-  - full_access
-```
-
-### Variables d'environnement `.env`
+Copy `.env` and update with your values:
 
 ```env
-DATABASE_URL=file:./dev.db
+DATABASE_URL="file:./database/dev.db"
 QUABLE_APP_PORT=4000
-QUABLE_APP_HOST_URL=localhost:4000
+QUABLE_APP_HOST_URL=http://localhost:4000
 QUABLE_PARTNER_ID=your_partner_id
 QUABLE_PARTNER_SECRET=your_partner_secret
 ```
 
-### Authentification JWT
+3. **Set up the database:**
 
-Les templates gèrent automatiquement :
-- ✅ Génération de tokens JWT
-- ✅ Validation des tokens
-- ✅ Renouvellement automatique
-- ✅ Stockage sécurisé en cookies HTTP-only
+```bash
+pnpm prisma:generate
+pnpm prisma:push
+```
 
-## Structure du repository
+4. **Start the development server:**
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:4000](http://localhost:4000) in your browser.
+
+## Project Structure
 
 ```
 quable-app-template/
-├── nodejs-quableapp-template/    # Template original (2022-2023)
-│   ├── src/                      # Backend Express + TypeScript
-│   ├── public/                   # Frontend (EJS, CSS, JS)
-│   ├── database/                 # Schéma Prisma
-│   └── README.md
-│
-├── quable-ui-app-template/       # Nouveau template (2026)
-│   ├── server/                   # Backend Express + TypeScript
-│   ├── src/                      # Frontend React + @quable/ui
-│   ├── database/                 # Schéma Prisma
-│   ├── README.md
-│   ├── QUICKSTART.md            # Guide de démarrage
-│   └── ARCHITECTURE.md          # Documentation architecture
-│
-├── COMPARISON.md                 # Comparaison détaillée
-└── README.md                     # Ce fichier
+├── app/                          # Next.js App Router
+│   ├── layout.tsx                # Root layout with providers
+│   ├── page.tsx                  # Home page (/)
+│   ├── providers.tsx             # ThemeContextProvider from @quable/ui
+│   ├── globals.css               # Global styles
+│   ├── config/page.tsx           # Configuration page (/config)
+│   ├── products/page.tsx         # Products page (/products)
+│   ├── quable-config/page.tsx    # Quable PIM iframe configuration
+│   ├── session/[id]/page.tsx     # Dynamic session pages
+│   └── api/                      # API Routes
+│       ├── permission/route.ts   # GET /api/permission
+│       ├── install/route.ts      # POST /api/install
+│       ├── quable/route.ts       # POST /?slot=x (slot interactions)
+│       └── session/[id]/route.ts # GET /api/session/:id
+├── components/                   # React components
+│   ├── Navigation.tsx            # App navigation bar
+│   ├── Hero.tsx                  # Hero section
+│   ├── ExampleForm.tsx           # Example form with @quable/ui
+│   ├── ProductFormModal.tsx      # Product edit modal
+│   ├── LanguageSwitcher.tsx      # Language toggle (EN/FR)
+│   └── session/                  # Session page components
+│       ├── SingleActionPage.tsx
+│       ├── BulkActionPage.tsx
+│       ├── PageTabPage.tsx
+│       ├── DefaultSessionPage.tsx
+│       └── ConfigurationPage.tsx
+├── i18n/                         # Internationalization
+│   ├── config.ts                 # i18next configuration
+│   └── locales/                  # Translation files
+│       ├── en.json
+│       └── fr.json
+├── lib/                          # Utilities
+│   ├── prisma.ts                 # Prisma client singleton
+│   └── config.ts                 # App configuration loader
+├── database/
+│   └── schema.prisma             # Database schema
+├── next.config.js                # Next.js configuration
+├── package.json                  # Dependencies and scripts
+├── quable.app.yml                # Quable PIM app configuration
+└── tsconfig.json                 # TypeScript configuration
 ```
 
-## Migration
-
-Si vous souhaitez migrer de l'ancien vers le nouveau template :
-
-1. Lisez le [guide de comparaison](./COMPARISON.md)
-2. Installez pnpm : `npm install -g pnpm`
-3. Suivez le [guide de démarrage](./quable-ui-app-template/QUICKSTART.md)
-4. Convertissez progressivement vos templates EJS en composants React
-5. Utilisez les composants @quable/ui pour l'UI
-
-## Prérequis
-
-### Pour nodejs-quableapp-template
-- Node.js >= 16.0.0
-- npm ou yarn
-
-### Pour quable-ui-app-template
-- Node.js >= 18.0.0
-- pnpm >= 9.0.0
-
-## Scripts communs
-
-Les deux templates partagent des scripts similaires :
+## Available Scripts
 
 ```bash
-# Développement
-npm/pnpm dev          # Lance le serveur de développement
+pnpm dev          # Start development server on port 4000
+pnpm build        # Build for production
+pnpm start        # Start production server
+pnpm lint         # Run ESLint
 
-# Production
-npm/pnpm build        # Build l'application
-npm/pnpm start        # Lance en production
-
-# Base de données
-npx/pnpm prisma:generate    # Génère le client Prisma
-npx/pnpm prisma:push        # Applique le schéma
-
-# Qualité
-npm/pnpm lint         # Vérifie le code
+pnpm prisma:generate  # Generate Prisma client
+pnpm prisma:push      # Push schema to database
 ```
 
-## Support et contributions
+## Using @quable/ui Components
 
-### Questions et problèmes
+Import and use components directly:
 
-- Pour @quable/ui : [GitHub Issues](https://github.com/quable/ui/issues)
-- Pour les templates : Contactez l'équipe Quable
+```tsx
+import { Button, TextField, Select, Checkbox } from '@quable/ui'
 
-### Documentation
+function MyComponent() {
+  return (
+    <div>
+      <TextField label="Name" />
+      <Select
+        label="Category"
+        options={[
+          { displayedValue: 'Option 1', value: '1', key: '1' },
+          { displayedValue: 'Option 2', value: '2', key: '2' },
+        ]}
+      />
+      <Checkbox label="Subscribe" />
+      <Button color="primary" variant="contained">
+        Submit
+      </Button>
+    </div>
+  )
+}
+```
 
-- [@quable/ui Documentation](https://github.com/quable/ui)
-- [Storybook interactif](https://quable-ui-storybook.web.app/)
-- [React Documentation](https://react.dev)
-- [Vite Documentation](https://vite.dev)
-- [Express Documentation](https://expressjs.com)
+### Available Components
 
-## Licence
+- **Actions**: Button
+- **Forms**: Autocomplete, Checkbox, Chip, ChoiceList, ColorPicker, DateField, DateRangePicker, DropZone, NumberField, PasswordField, Radio, RichTextEditor, Select, Switch, TextArea, TextField, TimeField, ToggleButtonGroup
 
-MIT © Quable
+Explore all components in the [live Storybook documentation](https://quable-ui-storybook.web.app/).
 
----
+## Quable PIM Integration
 
-## Recommandation
+### API Routes
 
-Pour les nouveaux projets, nous recommandons d'utiliser **quable-ui-app-template** qui offre :
-- ✨ Une expérience moderne et fluide
-- 🎨 Un design system cohérent
-- 🚀 De meilleures performances
-- 🧪 Une meilleure testabilité
-- 📦 Des composants réutilisables
+The template implements the Quable App Lifecycle:
 
-Le template **nodejs-quableapp-template** reste disponible pour les projets nécessitant du SSR traditionnel ou pour les équipes préférant une stack plus simple.
+| Route | Method | Description |
+|-------|--------|-------------|
+| `/api/permission` | GET | Returns app permissions scope |
+| `/api/install` | POST | Called when app is installed |
+| `/?slot=x` | POST | Slot interaction handler |
+| `/api/session/:id` | GET | Get session data |
+| `/quable-config` | GET | Configuration page for PIM iframe |
+| `/session/:id` | GET | Session pages (React components) |
+
+### Configuration
+
+Configure your app in `quable.app.yml`:
+
+```yaml
+quable_pim_scope:
+  - full_access
+```
+
+## Customization
+
+### Add new pages
+
+Create a new file in `app/` directory:
+
+```tsx
+// app/my-page/page.tsx
+export default function MyPage() {
+  return <div>My new page</div>
+}
+```
+
+### Add new API routes
+
+Create a new file in `app/api/`:
+
+```tsx
+// app/api/my-endpoint/route.ts
+import { NextResponse } from 'next/server'
+
+export async function GET() {
+  return NextResponse.json({ message: 'Hello!' })
+}
+```
+
+### Modify translations
+
+Edit files in `i18n/locales/`:
+
+```json
+// i18n/locales/en.json
+{
+  "myKey": "My translation"
+}
+```
+
+## Learn More
+
+- [@quable/ui Storybook](https://quable-ui-storybook.web.app/)
+- [@quable/ui npm](https://www.npmjs.com/package/@quable/ui)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [MUI Documentation](https://mui.com)
+- [Prisma Documentation](https://www.prisma.io/docs)
+
+## License
+
+MIT - Quable
