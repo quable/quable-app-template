@@ -1,11 +1,77 @@
 'use client'
 
-import { Box, Container, Stack } from '@mui/material'
+import { useState } from 'react'
+import {
+  Container,
+  Paper,
+  Typography,
+  Stack,
+  Box,
+  Alert,
+  Divider,
+} from '@mui/material'
+import { Button, TextField, Select, Switch, PasswordField } from '@quable/ui'
+import { useTranslation } from 'react-i18next'
 import { Navigation } from '@/components/Navigation'
-import { Hero } from '@/components/Hero'
-import { ApiDocumentation } from '@/components/ApiDocumentation'
 
-export default function HomePage() {
+interface ApiConfig {
+  apiUrl: string
+  apiKey: string
+  apiSecret: string
+  environment: string
+  timeout: string
+  enableLogging: boolean
+  retryAttempts: string
+  description: string
+}
+
+export default function ConfigPage() {
+  const { t } = useTranslation()
+  const [config, setConfig] = useState<ApiConfig>({
+    apiUrl: '',
+    apiKey: '',
+    apiSecret: '',
+    environment: 'production',
+    timeout: '30',
+    enableLogging: true,
+    retryAttempts: '3',
+    description: '',
+  })
+
+  const [saved, setSaved] = useState(false)
+
+  const environments = [
+    { displayedValue: t('config.environments.production'), value: 'production', key: 'production' },
+    { displayedValue: t('config.environments.staging'), value: 'staging', key: 'staging' },
+    { displayedValue: t('config.environments.development'), value: 'development', key: 'development' },
+  ]
+
+  const handleChange =
+    (field: keyof ApiConfig) =>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (e: any) => {
+      setConfig({ ...config, [field]: e.target.value })
+      setSaved(false)
+    }
+
+  const handleSwitchChange =
+    (field: keyof ApiConfig) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setConfig({ ...config, [field]: e.target.checked })
+      setSaved(false)
+    }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log('Configuration saved:', config)
+    setSaved(true)
+    setTimeout(() => setSaved(false), 3000)
+  }
+
+  const handleTestConnection = () => {
+    console.log('Testing connection with:', config)
+    alert(t('config.messages.testConnection'))
+  }
+
   return (
     <Box
       sx={{
@@ -17,11 +83,127 @@ export default function HomePage() {
     >
       <Navigation />
       <Box component="main" sx={{ flex: 1 }}>
-        <Container maxWidth="lg" sx={{ py: 4 }}>
-          <Stack spacing={6} alignItems="center" sx={{ width: '100%' }}>
-            <Hero />
-            <ApiDocumentation />
-          </Stack>
+        <Container maxWidth="md" sx={{ py: 4 }}>
+          <Paper elevation={3} sx={{ p: 4 }}>
+            <Typography variant="h4" gutterBottom sx={{ fontWeight: 600, mb: 3 }}>
+              {t('config.title')}
+            </Typography>
+
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 4 }}>
+              {t('config.description')}
+            </Typography>
+
+            {saved && (
+              <Alert severity="success" sx={{ mb: 3 }}>
+                {t('config.successMessage')}
+              </Alert>
+            )}
+
+            <Box component="form" onSubmit={handleSubmit}>
+              <Stack spacing={3}>
+                <Typography variant="h6" sx={{ fontWeight: 500 }}>
+                  {t('config.sections.connectionInfo')}
+                </Typography>
+
+                <TextField
+                  label={t('config.fields.apiUrl')}
+                  placeholder={t('config.fields.apiUrlPlaceholder')}
+                  value={config.apiUrl}
+                  onChange={handleChange('apiUrl')}
+                  required
+                  fullWidth
+                />
+
+                <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+                  <TextField
+                    label={t('config.fields.apiKey')}
+                    placeholder={t('config.fields.apiKeyPlaceholder')}
+                    value={config.apiKey}
+                    onChange={handleChange('apiKey')}
+                    required
+                    fullWidth
+                  />
+                  <PasswordField
+                    label={t('config.fields.apiSecret')}
+                    placeholder={t('config.fields.apiSecretPlaceholder')}
+                    value={config.apiSecret}
+                    onChange={handleChange('apiSecret')}
+                    required
+                    fullWidth
+                  />
+                </Stack>
+
+                <Select
+                  label={t('config.fields.environment')}
+                  value={config.environment}
+                  onChange={handleChange('environment')}
+                  options={environments}
+                  required
+                  fullWidth
+                />
+
+                <Divider sx={{ my: 2 }} />
+
+                <Typography variant="h6" sx={{ fontWeight: 500 }}>
+                  {t('config.sections.advancedSettings')}
+                </Typography>
+
+                <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+                  <TextField
+                    label={t('config.fields.timeout')}
+                    type="number"
+                    value={config.timeout}
+                    onChange={handleChange('timeout')}
+                    fullWidth
+                  />
+                  <TextField
+                    label={t('config.fields.retryAttempts')}
+                    type="number"
+                    value={config.retryAttempts}
+                    onChange={handleChange('retryAttempts')}
+                    fullWidth
+                  />
+                </Stack>
+
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Switch
+                    label={t('config.fields.enableLogging')}
+                    checked={config.enableLogging}
+                    onChange={handleSwitchChange('enableLogging')}
+                  />
+                  <Typography variant="body2" color="text.secondary" sx={{ ml: 2 }}>
+                    {t('config.fields.loggingHelp')}
+                  </Typography>
+                </Box>
+
+                <TextField
+                  label={t('config.fields.description')}
+                  placeholder={t('config.fields.descriptionPlaceholder')}
+                  value={config.description}
+                  onChange={handleChange('description')}
+                  multiline
+                  rows={3}
+                  fullWidth
+                />
+
+                <Divider sx={{ my: 2 }} />
+
+                <Stack direction="row" spacing={2} justifyContent="flex-end">
+                  <Button
+                    type="button"
+                    color="secondary"
+                    variant="outlined"
+                    onClick={handleTestConnection}
+                  >
+                    {t('config.buttons.testConnection')}
+                  </Button>
+                  <Button type="submit" color="primary" variant="contained">
+                    {t('config.buttons.saveConfiguration')}
+                  </Button>
+                </Stack>
+              </Stack>
+            </Box>
+          </Paper>
         </Container>
       </Box>
     </Box>

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import InventoryIcon from '@mui/icons-material/Inventory'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
 import AutoStoriesIcon from '@mui/icons-material/AutoStories'
+import HomeIcon from '@mui/icons-material/Home'
 import SettingsIcon from '@mui/icons-material/Settings'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import ApiIcon from '@mui/icons-material/Api'
@@ -36,7 +37,12 @@ export function Hero() {
 
   const examplePages = [
     {
-      path: '/config',
+      path: '/readme',
+      icon: <HomeIcon fontSize="small" />,
+      labelKey: 'navigation.readme',
+    },
+    {
+      path: '/',
       icon: <SettingsIcon fontSize="small" />,
       labelKey: 'hero.pages.config',
     },

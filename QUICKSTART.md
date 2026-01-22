@@ -70,8 +70,8 @@ Ouvrez votre navigateur a `http://localhost:4000` pour voir l'application.
 
 | URL | Description |
 | --- | --- |
-| `/` | Page d'accueil avec Hero et formulaire d'exemple |
-| `/config` | Page de configuration API |
+| `/` | Configuration API |
+| `/readme` | Readme |
 | `/products` | Gestion des produits avec DataGrid |
 
 ### Essayer les composants @quable/ui
@@ -93,8 +93,8 @@ Les pages sont dans le dossier `app/` :
 
 ```text
 app/
-├── page.tsx           # Page d'accueil (/)
-├── config/page.tsx    # Configuration (/config)
+├── page.tsx           # Configuration (/)
+├── readme/page.tsx    # Readme (/readme)
 ├── products/page.tsx  # Produits (/products)
 └── layout.tsx         # Layout global
 ```
@@ -136,10 +136,10 @@ Accessible sur `http://localhost:4000/ma-page`
 
 ### Ajouter une API route
 
-Creez un nouveau fichier dans `app/api/` :
+Creez un nouveau fichier dans `app/` :
 
 ```tsx
-// app/api/hello/route.ts
+// app/hello/route.ts
 import { NextResponse } from 'next/server'
 
 export async function GET() {
@@ -147,7 +147,7 @@ export async function GET() {
 }
 ```
 
-Testez : `http://localhost:4000/api/hello`
+Testez : `http://localhost:4000/hello`
 
 ## Ajouter de nouveaux composants @quable/ui
 

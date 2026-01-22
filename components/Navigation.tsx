@@ -47,7 +47,7 @@ export function Navigation() {
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
           <Tabs
-            value={pathname}
+            value={pathname === '/' || pathname === '/readme' || pathname === '/products' ? pathname : false}
             onChange={handleChange}
             textColor="inherit"
             TabIndicatorProps={{
@@ -62,36 +62,12 @@ export function Navigation() {
               },
             }}
           >
-            <Tab icon={<HomeIcon />} iconPosition="start" label={t('navigation.home')} value="/" />
-          </Tabs>
-
-          <Divider orientation="vertical" flexItem sx={{ mx: 2, borderColor: 'rgba(255,255,255,0.3)' }} />
-
-          <Tooltip title={t('navigation.examplePagesHint')}>
-            <DesignServicesIcon sx={{ color: 'rgba(255,255,255,0.7)', mr: 1, fontSize: 18 }} />
-          </Tooltip>
-
-          <Tabs
-            value={pathname === '/config' || pathname === '/products' ? pathname : false}
-            onChange={handleChange}
-            textColor="inherit"
-            TabIndicatorProps={{
-              style: { backgroundColor: 'white' },
-            }}
-            sx={{
-              '& .MuiTab-root': {
-                color: 'white',
-                '&.Mui-selected': {
-                  color: 'white',
-                },
-              },
-            }}
-          >
+            <Tab icon={<HomeIcon />} iconPosition="start" label={t('navigation.readme')} value="/readme" />
             <Tab
               icon={<SettingsIcon />}
               iconPosition="start"
               label={t('navigation.configuration')}
-              value="/config"
+              value="/"
             />
             <Tab
               icon={<ListAltIcon />}

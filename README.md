@@ -58,18 +58,17 @@ Open [http://localhost:4000](http://localhost:4000) in your browser.
 quable-app-template/
 ├── app/                          # Next.js App Router
 │   ├── layout.tsx                # Root layout with providers
-│   ├── page.tsx                  # Home page (/)
+│   ├── page.tsx                  # Configuration page (/)
 │   ├── providers.tsx             # ThemeContextProvider from @quable/ui
 │   ├── globals.css               # Global styles
-│   ├── config/page.tsx           # Configuration page (/config)
+│   ├── readme/page.tsx           # Readme page (/readme)
 │   ├── products/page.tsx         # Products page (/products)
 │   ├── quable-config/page.tsx    # Quable PIM iframe configuration
+│   ├── route.ts                  # POST /?slot=x (slot interactions)
+│   ├── permission/route.ts       # GET /permission
+│   ├── install/route.ts          # POST /install
 │   ├── session/[id]/page.tsx     # Dynamic session pages
-│   └── api/                      # API Routes
-│       ├── permission/route.ts   # GET /api/permission
-│       ├── install/route.ts      # POST /api/install
-│       ├── quable/route.ts       # POST /?slot=x (slot interactions)
-│       └── session/[id]/route.ts # GET /api/session/:id
+│   └── session/[id]/route.ts     # GET /session/:id
 ├── components/                   # React components
 │   ├── Navigation.tsx            # App navigation bar
 │   ├── Hero.tsx                  # Hero section

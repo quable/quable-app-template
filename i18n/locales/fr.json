@@ -14,6 +14,7 @@
   "navigation": {
     "appTitle": "Quable App Template v2.0",
     "home": "Accueil",
+    "readme": "Readme",
     "configuration": "Configuration",
     "products": "Produits",
     "examplePagesHint": "Exemples de design"
