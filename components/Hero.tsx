@@ -175,7 +175,7 @@ export function Hero() {
               </Typography>
               <Stack spacing={1}>
                 <Chip
-                  label="/api/permission"
+                  label="/permission"
                   size="small"
                   sx={{
                     bgcolor: 'rgba(255,255,255,0.2)',
@@ -184,7 +184,7 @@ export function Hero() {
                   }}
                 />
                 <Chip
-                  label="/api/install"
+                  label="/install"
                   size="small"
                   sx={{
                     bgcolor: 'rgba(255,255,255,0.2)',
@@ -193,7 +193,7 @@ export function Hero() {
                   }}
                 />
                 <Chip
-                  label="/api?slot=..."
+                  label="/?slot=..."
                   size="small"
                   sx={{
                     bgcolor: 'rgba(255,255,255,0.2)',

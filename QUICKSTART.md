@@ -258,7 +258,7 @@ pnpm prisma:push
 1. **Lisez la doc @quable/ui** : [https://github.com/quable/ui](https://github.com/quable/ui)
 1. **Consultez README.md** pour la documentation complete
 1. **Modifiez les composants** pour vos besoins
-1. **Ajoutez vos routes API** dans `app/api/`
+1. **Ajoutez vos routes API** dans `app/`
 1. **Integrez avec Quable PIM** en configurant `quable.app.yml`
 
 ## Ressources

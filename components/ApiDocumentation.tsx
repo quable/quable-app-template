@@ -24,37 +24,37 @@ import { useTranslation } from 'react-i18next'
 const apiEndpoints = [
   {
     method: 'GET',
-    path: '/api/permission',
+    path: '/permission',
     description: 'Returns app permissions scope (from quable.app.yml)',
-    example: 'curl http://localhost:4000/api/permission',
+    example: 'curl http://localhost:4000/permission',
   },
   {
     method: 'POST',
-    path: '/api/install',
+    path: '/install',
     description: 'Called when the app is installed on a Quable instance',
     example:
-      'curl -X POST "http://localhost:4000/api/install?quableInstanceName=demo&interfaceLocale=en&dataLocale=fr_FR"',
+      'curl -X POST "http://localhost:4000/install?quableInstanceName=demo&interfaceLocale=en&dataLocale=fr_FR"',
   },
   {
     method: 'POST',
-    path: '/api?slot=x',
+    path: '/?slot=x',
     description: 'Handles slot interactions (single action, bulk action, page tab)',
-    example: `curl -X POST "http://localhost:4000/api?slot=document.action.single" \\
+    example: `curl -X POST "http://localhost:4000/?slot=document.action.single" \\
   -H "Content-Type: application/json" \\
   -d '{"instance":{"name":"demo"},"user":{"email":"test@test.com","admin":true},"object":{"type":"product","ids":["123"]},"locale":{"data":"fr","interface":"en"}}'`,
   },
   {
     method: 'GET',
-    path: '/api/session/:id',
+    path: '/session/:id',
     description: 'Get session data by ID (JSON)',
-    example: 'curl http://localhost:4000/api/session/<SESSION_ID>',
+    example: 'curl http://localhost:4000/session/<SESSION_ID>',
   },
   {
     method: 'GET',
-    path: '/api',
+    path: '/',
     description: 'Configuration page displayed in PIM iframe',
     example:
-      'http://localhost:4000/api?applicationType=document&quableInstanceName=demo&interfaceLocale=en&dataLocale=fr_FR&userId=123',
+      'http://localhost:4000/?applicationType=document&quableInstanceName=demo&interfaceLocale=en&dataLocale=fr_FR&userId=123',
   },
 ]
 

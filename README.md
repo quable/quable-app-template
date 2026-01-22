@@ -151,12 +151,11 @@ The template implements the Quable App Lifecycle:
 
 | Route | Method | Description |
 |-------|--------|-------------|
-| `/api/permission` | GET | Returns app permissions scope |
-| `/api/install` | POST | Called when app is installed |
+| `/permission` | GET | Returns app permissions scope |
+| `/install` | POST | Called when app is installed |
 | `/?slot=x` | POST | Slot interaction handler |
-| `/api/session/:id` | GET | Get session data |
+| `/session/:id` | GET | Get session data |
 | `/quable-config` | GET | Configuration page for PIM iframe |
-| `/session/:id` | GET | Session pages (React components) |
 
 ### Configuration
 
@@ -182,10 +181,10 @@ export default function MyPage() {
 
 ### Add new API routes
 
-Create a new file in `app/api/`:
+Create a new file in `app/`:
 
 ```tsx
-// app/api/my-endpoint/route.ts
+// app/my-endpoint/route.ts
 import { NextResponse } from 'next/server'
 
 export async function GET() {
