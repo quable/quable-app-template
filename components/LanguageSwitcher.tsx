@@ -25,6 +25,7 @@ export function LanguageSwitcher() {
 
   const handleLanguageChange = (languageCode: string) => {
     i18n.changeLanguage(languageCode)
+    localStorage.setItem('i18nextLng', languageCode)
     handleClose()
   }
 

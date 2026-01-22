@@ -6,7 +6,6 @@ import {
   Paper,
   Typography,
   Stack,
-  Grid,
   Box,
   Alert,
   Divider,
@@ -115,28 +114,24 @@ export default function ConfigPage() {
                   fullWidth
                 />
 
-                <Grid container spacing={2} alignItems="flex-start">
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      label={t('config.fields.apiKey')}
-                      placeholder={t('config.fields.apiKeyPlaceholder')}
-                      value={config.apiKey}
-                      onChange={handleChange('apiKey')}
-                      required
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <PasswordField
-                      label={t('config.fields.apiSecret')}
-                      placeholder={t('config.fields.apiSecretPlaceholder')}
-                      value={config.apiSecret}
-                      onChange={handleChange('apiSecret')}
-                      required
-                      fullWidth
-                    />
-                  </Grid>
-                </Grid>
+                <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+                  <TextField
+                    label={t('config.fields.apiKey')}
+                    placeholder={t('config.fields.apiKeyPlaceholder')}
+                    value={config.apiKey}
+                    onChange={handleChange('apiKey')}
+                    required
+                    fullWidth
+                  />
+                  <PasswordField
+                    label={t('config.fields.apiSecret')}
+                    placeholder={t('config.fields.apiSecretPlaceholder')}
+                    value={config.apiSecret}
+                    onChange={handleChange('apiSecret')}
+                    required
+                    fullWidth
+                  />
+                </Stack>
 
                 <Select
                   label={t('config.fields.environment')}
@@ -153,26 +148,22 @@ export default function ConfigPage() {
                   {t('config.sections.advancedSettings')}
                 </Typography>
 
-                <Grid container spacing={2} alignItems="flex-start">
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      label={t('config.fields.timeout')}
-                      type="number"
-                      value={config.timeout}
-                      onChange={handleChange('timeout')}
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      label={t('config.fields.retryAttempts')}
-                      type="number"
-                      value={config.retryAttempts}
-                      onChange={handleChange('retryAttempts')}
-                      fullWidth
-                    />
-                  </Grid>
-                </Grid>
+                <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+                  <TextField
+                    label={t('config.fields.timeout')}
+                    type="number"
+                    value={config.timeout}
+                    onChange={handleChange('timeout')}
+                    fullWidth
+                  />
+                  <TextField
+                    label={t('config.fields.retryAttempts')}
+                    type="number"
+                    value={config.retryAttempts}
+                    onChange={handleChange('retryAttempts')}
+                    fullWidth
+                  />
+                </Stack>
 
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Switch

@@ -1,26 +1,63 @@
 'use client'
 
-import { Box, Typography, Stack, Paper } from '@mui/material'
+import { Box, Typography, Stack, Paper, Chip, Divider } from '@mui/material'
 import { Button } from '@quable/ui'
 import { useRouter } from 'next/navigation'
+import InventoryIcon from '@mui/icons-material/Inventory'
+import MenuBookIcon from '@mui/icons-material/MenuBook'
+import AutoStoriesIcon from '@mui/icons-material/AutoStories'
 import SettingsIcon from '@mui/icons-material/Settings'
 import ListAltIcon from '@mui/icons-material/ListAlt'
+import ApiIcon from '@mui/icons-material/Api'
+import DesignServicesIcon from '@mui/icons-material/DesignServices'
 import { useTranslation } from 'react-i18next'
 
 export function Hero() {
-  const router = useRouter()
   const { t } = useTranslation()
+  const router = useRouter()
+
+  const externalLinks = [
+    {
+      url: 'https://www.npmjs.com/package/@quable/ui?activeTab=readme',
+      icon: <InventoryIcon />,
+      labelKey: 'hero.npmQuableUI',
+    },
+    {
+      url: 'https://quable-ui-storybook.web.app/',
+      icon: <AutoStoriesIcon />,
+      labelKey: 'hero.viewStorybook',
+    },
+    {
+      url: 'https://developers.quable.com/quable-app/definition/',
+      icon: <MenuBookIcon />,
+      labelKey: 'hero.buildQuableApp',
+    },
+  ]
+
+  const examplePages = [
+    {
+      path: '/config',
+      icon: <SettingsIcon fontSize="small" />,
+      labelKey: 'hero.pages.config',
+    },
+    {
+      path: '/products',
+      icon: <ListAltIcon fontSize="small" />,
+      labelKey: 'hero.pages.products',
+    },
+  ]
 
   return (
     <Paper
       elevation={3}
       sx={{
         textAlign: 'center',
-        py: 8,
+        py: 6,
         px: 4,
         bgcolor: 'primary.main',
         color: 'white',
         borderRadius: 3,
+        width: '100%',
       }}
     >
       <Stack spacing={4} alignItems="center">
@@ -42,54 +79,125 @@ export function Hero() {
         >
           {t('hero.description')}
         </Typography>
-        <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
-          <Button
-            color="primary"
-            variant="contained"
-            startIcon={<SettingsIcon />}
-            onClick={() => router.push('/config')}
-            sx={{
-              bgcolor: 'white',
-              color: 'primary.main',
-              '&:hover': {
-                bgcolor: 'rgba(255,255,255,0.9)',
-              },
-            }}
-          >
-            {t('navigation.configuration')}
-          </Button>
-          <Button
-            color="secondary"
-            variant="contained"
-            startIcon={<ListAltIcon />}
-            onClick={() => router.push('/products')}
-            sx={{
-              bgcolor: 'rgba(255,255,255,0.2)',
-              color: 'white',
-              backdropFilter: 'blur(10px)',
-              '&:hover': {
-                bgcolor: 'rgba(255,255,255,0.3)',
-              },
-            }}
-          >
-            {t('navigation.products')}
-          </Button>
+
+        {/* External Links */}
+        <Stack direction="row" spacing={2} flexWrap="wrap" justifyContent="center">
+          {externalLinks.map((link) => (
+            <Button
+              key={link.url}
+              variant="outlined"
+              startIcon={link.icon}
+              onClick={() => window.open(link.url, '_blank')}
+              sx={{
+                color: 'white',
+                borderColor: 'rgba(255,255,255,0.5)',
+                '&:hover': {
+                  borderColor: 'white',
+                  bgcolor: 'rgba(255,255,255,0.1)',
+                },
+              }}
+            >
+              {t(link.labelKey)}
+            </Button>
+          ))}
         </Stack>
-        <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
-          <Button
-            variant="text"
-            onClick={() => window.open('https://quable-ui-storybook.web.app/', '_blank')}
-            sx={{ color: 'white', textDecoration: 'underline' }}
+
+        <Divider sx={{ width: '100%', borderColor: 'rgba(255,255,255,0.2)', my: 2 }} />
+
+        {/* Two columns: Example Pages and API Endpoints */}
+        <Stack
+          direction={{ xs: 'column', md: 'row' }}
+          spacing={4}
+          sx={{ width: '100%', maxWidth: 900 }}
+        >
+          {/* Example Pages Section */}
+          <Paper
+            sx={{
+              flex: 1,
+              p: 3,
+              bgcolor: 'rgba(255,255,255,0.1)',
+              backdropFilter: 'blur(10px)',
+            }}
           >
-            {t('hero.viewStorybook')}
-          </Button>
-          <Button
-            variant="text"
-            onClick={() => window.open('https://github.com/quable/ui', '_blank')}
-            sx={{ color: 'white', textDecoration: 'underline' }}
+            <Stack spacing={2}>
+              <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
+                <DesignServicesIcon fontSize="small" />
+                <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+                  {t('hero.sections.examplePages')}
+                </Typography>
+              </Stack>
+              <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                {t('hero.sections.examplePagesDesc')}
+              </Typography>
+              <Stack spacing={1}>
+                {examplePages.map((page) => (
+                  <Chip
+                    key={page.path}
+                    icon={page.icon}
+                    label={t(page.labelKey)}
+                    onClick={() => router.push(page.path)}
+                    sx={{
+                      bgcolor: 'rgba(255,255,255,0.2)',
+                      color: 'white',
+                      '&:hover': { bgcolor: 'rgba(255,255,255,0.3)' },
+                      '& .MuiChip-icon': { color: 'white' },
+                    }}
+                  />
+                ))}
+              </Stack>
+            </Stack>
+          </Paper>
+
+          {/* API Endpoints Section */}
+          <Paper
+            sx={{
+              flex: 1,
+              p: 3,
+              bgcolor: 'rgba(255,255,255,0.1)',
+              backdropFilter: 'blur(10px)',
+            }}
           >
-            {t('hero.githubQuableUI')}
-          </Button>
+            <Stack spacing={2}>
+              <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
+                <ApiIcon fontSize="small" />
+                <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+                  {t('hero.sections.apiEndpoints')}
+                </Typography>
+              </Stack>
+              <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                {t('hero.sections.apiEndpointsDesc')}
+              </Typography>
+              <Stack spacing={1}>
+                <Chip
+                  label="/api/permission"
+                  size="small"
+                  sx={{
+                    bgcolor: 'rgba(255,255,255,0.2)',
+                    color: 'white',
+                    fontFamily: 'monospace',
+                  }}
+                />
+                <Chip
+                  label="/api/install"
+                  size="small"
+                  sx={{
+                    bgcolor: 'rgba(255,255,255,0.2)',
+                    color: 'white',
+                    fontFamily: 'monospace',
+                  }}
+                />
+                <Chip
+                  label="/api?slot=..."
+                  size="small"
+                  sx={{
+                    bgcolor: 'rgba(255,255,255,0.2)',
+                    color: 'white',
+                    fontFamily: 'monospace',
+                  }}
+                />
+              </Stack>
+            </Stack>
+          </Paper>
         </Stack>
       </Stack>
     </Paper>

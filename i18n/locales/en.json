@@ -15,13 +15,25 @@
     "appTitle": "Quable App Template v2.0",
     "home": "Home",
     "configuration": "Configuration",
-    "products": "Products"
+    "products": "Products",
+    "examplePagesHint": "Design examples"
   },
   "hero": {
     "logoAlt": "Quable Logo",
-    "description": "Modern application with React, @quable/ui and Next.js. Explore different pages to discover features.",
-    "viewStorybook": "View Storybook",
-    "githubQuableUI": "GitHub @quable/ui"
+    "description": "Template for creating QuableApps with React, @quable/ui and Next.js. Implements the Quable App Lifecycle API.",
+    "viewStorybook": "Storybook",
+    "npmQuableUI": "npm @quable/ui",
+    "buildQuableApp": "Build a QuableApp",
+    "sections": {
+      "examplePages": "Example Pages",
+      "examplePagesDesc": "Design examples using @quable/ui components. These pages are provided for inspiration only.",
+      "apiEndpoints": "API Endpoints",
+      "apiEndpointsDesc": "Routes required to install the app on a PIM and manage slot interactions."
+    },
+    "pages": {
+      "config": "Configuration",
+      "products": "Products"
+    }
   },
   "exampleForm": {
     "title": "Example Form with @quable/ui",
@@ -121,6 +133,17 @@
         "update": "Update"
       }
     }
+  },
+  "apiDoc": {
+    "title": "API Endpoints",
+    "description": "This template implements the Quable App Lifecycle API. Use the test.http file to test these endpoints.",
+    "method": "Method",
+    "endpoint": "Endpoint",
+    "descriptionCol": "Description",
+    "slotTypes": "Slot Types",
+    "examples": "cURL Examples",
+    "testFile": "Test with REST Client",
+    "testFileDescription": "Open the test.http file in VS Code with the REST Client extension to test all endpoints interactively."
   },
   "errors": {
     "generic": "An error occurred",

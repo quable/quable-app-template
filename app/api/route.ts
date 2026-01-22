@@ -1,7 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
-// POST /?slot=x - Slot interaction
+// GET /api - Configuration page (redirects to /quable-config)
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams
+  const queryString = searchParams.toString()
+
+  // Redirect to the config page with the same query params
+  const redirectUrl = `/quable-config${queryString ? `?${queryString}` : ''}`
+  return NextResponse.redirect(new URL(redirectUrl, request.url))
+}
+
+// POST /api?slot=x - Slot interaction
 export async function POST(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   const slot = searchParams.get('slot')

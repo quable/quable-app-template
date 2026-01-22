@@ -1,0 +1,93 @@
+### Variables
+@baseUrl = http://localhost:4000
+
+### 1. GET /api/permission
+# Retourne les permissions de l'app (depuis quable.app.yml)
+GET {{baseUrl}}/api/permission
+
+### 2. POST /api/install
+# Simule l'installation de l'app sur une instance Quable
+POST {{baseUrl}}/api/install?quableInstanceName=demo-instance&interfaceLocale=en-US&dataLocale=fr_FR
+Content-Type: application/json
+
+{}
+
+### 3. POST /api?slot=document.action.single
+# Simule une action sur un document unique
+POST {{baseUrl}}/api?slot=document.action.single
+Content-Type: application/json
+
+{
+  "instance": {
+    "name": "demo-instance",
+    "url": "https://demo.quable.com"
+  },
+  "user": {
+    "email": "user@quable.com",
+    "admin": true
+  },
+  "object": {
+    "type": "product",
+    "ids": ["PROD-001"]
+  },
+  "locale": {
+    "data": "fr_FR",
+    "interface": "en-US"
+  }
+}
+
+### 4. POST /api?slot=document.action.bulk
+# Simule une action sur plusieurs documents
+POST {{baseUrl}}/api?slot=document.action.bulk
+Content-Type: application/json
+
+{
+  "instance": {
+    "name": "demo-instance",
+    "url": "https://demo.quable.com"
+  },
+  "user": {
+    "email": "admin@quable.com",
+    "admin": true
+  },
+  "object": {
+    "type": "product",
+    "ids": ["PROD-001", "PROD-002", "PROD-003", "PROD-004"]
+  },
+  "locale": {
+    "data": "fr_FR",
+    "interface": "fr-FR"
+  }
+}
+
+### 5. POST /api?slot=document.page.tab
+# Simule un onglet de page document
+POST {{baseUrl}}/api?slot=document.page.tab
+Content-Type: application/json
+
+{
+  "instance": {
+    "name": "demo-instance",
+    "url": "https://demo.quable.com"
+  },
+  "user": {
+    "email": "user@quable.com",
+    "admin": false
+  },
+  "object": {
+    "type": "document",
+    "ids": ["DOC-123"]
+  },
+  "locale": {
+    "data": "en_GB",
+    "interface": "en-US"
+  }
+}
+
+### 6. GET /api/session/:id
+# Remplacez <SESSION_ID> par l'ID retourné par les requêtes précédentes
+GET {{baseUrl}}/api/session/<SESSION_ID>
+
+### 7. GET /api (page de configuration dans iframe PIM)
+# Simule l'ouverture de la page de config dans le PIM
+GET {{baseUrl}}/api?applicationType=document&quableInstanceName=demo&interfaceLocale=en-US&dataLocale=fr_FR&userId=user-123

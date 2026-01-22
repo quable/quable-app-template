@@ -15,13 +15,25 @@
     "appTitle": "Quable App Template v2.0",
     "home": "Accueil",
     "configuration": "Configuration",
-    "products": "Produits"
+    "products": "Produits",
+    "examplePagesHint": "Exemples de design"
   },
   "hero": {
     "logoAlt": "Logo Quable",
-    "description": "Application moderne avec React, @quable/ui et Next.js. Explorez les différentes pages pour découvrir les fonctionnalités.",
-    "viewStorybook": "Voir le Storybook",
-    "githubQuableUI": "GitHub @quable/ui"
+    "description": "Template pour créer des QuableApps avec React, @quable/ui et Next.js. Implémente l'API Quable App Lifecycle.",
+    "viewStorybook": "Storybook",
+    "npmQuableUI": "npm @quable/ui",
+    "buildQuableApp": "Créer une QuableApp",
+    "sections": {
+      "examplePages": "Pages d'exemple",
+      "examplePagesDesc": "Exemples de design utilisant les composants @quable/ui. Ces pages sont fournies à titre d'inspiration uniquement.",
+      "apiEndpoints": "Points d'API",
+      "apiEndpointsDesc": "Routes nécessaires pour installer l'app sur un PIM et gérer les interactions de slots."
+    },
+    "pages": {
+      "config": "Configuration",
+      "products": "Produits"
+    }
   },
   "exampleForm": {
     "title": "Formulaire d'exemple avec @quable/ui",
@@ -121,6 +133,17 @@
         "update": "Mettre à jour"
       }
     }
+  },
+  "apiDoc": {
+    "title": "Points d'API",
+    "description": "Ce template implémente l'API Quable App Lifecycle. Utilisez le fichier test.http pour tester ces endpoints.",
+    "method": "Méthode",
+    "endpoint": "Endpoint",
+    "descriptionCol": "Description",
+    "slotTypes": "Types de Slot",
+    "examples": "Exemples cURL",
+    "testFile": "Tester avec REST Client",
+    "testFileDescription": "Ouvrez le fichier test.http dans VS Code avec l'extension REST Client pour tester tous les endpoints de manière interactive."
   },
   "errors": {
     "generic": "Une erreur s'est produite",

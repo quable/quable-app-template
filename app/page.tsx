@@ -3,7 +3,7 @@
 import { Box, Container, Stack } from '@mui/material'
 import { Navigation } from '@/components/Navigation'
 import { Hero } from '@/components/Hero'
-import { ExampleForm } from '@/components/ExampleForm'
+import { ApiDocumentation } from '@/components/ApiDocumentation'
 
 export default function HomePage() {
   return (
@@ -20,7 +20,7 @@ export default function HomePage() {
         <Container maxWidth="lg" sx={{ py: 4 }}>
           <Stack spacing={6} alignItems="center" sx={{ width: '100%' }}>
             <Hero />
-            <ExampleForm />
+            <ApiDocumentation />
           </Stack>
         </Container>
       </Box>

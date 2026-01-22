@@ -7,7 +7,6 @@ import {
   DialogContent,
   DialogActions,
   Stack,
-  Grid,
   IconButton,
   Typography,
 } from '@mui/material'
@@ -179,61 +178,53 @@ export function ProductFormModal({ open, onClose, onSave, product }: ProductForm
               helperText={errors.name}
             />
 
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  label={t('products.modal.fields.sku')}
-                  placeholder={t('products.modal.fields.skuPlaceholder')}
-                  value={formData.sku}
-                  onChange={handleChange('sku')}
-                  required
-                  fullWidth
-                  error={!!errors.sku}
-                  helperText={errors.sku}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Select
-                  label={t('products.modal.fields.category')}
-                  value={formData.category}
-                  onChange={handleChange('category')}
-                  options={categories}
-                  required
-                  fullWidth
-                  error={!!errors.category}
-                  helperText={errors.category}
-                />
-              </Grid>
-            </Grid>
+            <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+              <TextField
+                label={t('products.modal.fields.sku')}
+                placeholder={t('products.modal.fields.skuPlaceholder')}
+                value={formData.sku}
+                onChange={handleChange('sku')}
+                required
+                fullWidth
+                error={!!errors.sku}
+                helperText={errors.sku}
+              />
+              <Select
+                label={t('products.modal.fields.category')}
+                value={formData.category}
+                onChange={handleChange('category')}
+                options={categories}
+                required
+                fullWidth
+                error={!!errors.category}
+                helperText={errors.category}
+              />
+            </Stack>
 
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  label={t('products.modal.fields.price')}
-                  type="number"
-                  value={formData.price}
-                  onChange={handleChange('price')}
-                  required
-                  fullWidth
-                  error={!!errors.price}
-                  helperText={errors.price}
-                  inputProps={{ min: 0, step: 0.01 }}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  label={t('products.modal.fields.stock')}
-                  type="number"
-                  value={formData.stock}
-                  onChange={handleChange('stock')}
-                  required
-                  fullWidth
-                  error={!!errors.stock}
-                  helperText={errors.stock}
-                  inputProps={{ min: 0 }}
-                />
-              </Grid>
-            </Grid>
+            <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+              <TextField
+                label={t('products.modal.fields.price')}
+                type="number"
+                value={formData.price}
+                onChange={handleChange('price')}
+                required
+                fullWidth
+                error={!!errors.price}
+                helperText={errors.price}
+                inputProps={{ min: 0, step: 0.01 }}
+              />
+              <TextField
+                label={t('products.modal.fields.stock')}
+                type="number"
+                value={formData.stock}
+                onChange={handleChange('stock')}
+                required
+                fullWidth
+                error={!!errors.stock}
+                helperText={errors.stock}
+                inputProps={{ min: 0 }}
+              />
+            </Stack>
 
             <Select
               label={t('products.modal.fields.status')}
