@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+.page-layout {
+  min-height: 100vh;
+  padding: var(--q-space-500);
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.page-layout .content-wrapper {
+  display: grid;
+  place-items: center;
+}
+
+.products-page-list-wrapper {
+  height: 90vh;
+}
