@@ -6,13 +6,19 @@ export default function ErrorPage() {
   return (
     <div className="page-layout">
       <Typography variant="h4">Error</Typography>
-      <div className="content-wrapper">
-        <div className="text-center">
-          <Typography variant="h4">{t("title")}</Typography>
-          <Box className={"h-4"} />
-          <Typography variant="body-lg">{t("description")}</Typography>
-        </div>
-      </div>
+      <Box
+        sx={{
+          flexDirection: "column",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "calc(100vh - 80px)",
+        }}
+      >
+        <Typography variant="h4">{t("title")}</Typography>
+        <Box sx={{ height: "var(--q-space-500)" }} />
+        <Typography variant="body-lg">{t("description")}</Typography>
+      </Box>
     </div>
   );
 }

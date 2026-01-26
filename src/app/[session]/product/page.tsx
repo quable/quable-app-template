@@ -96,7 +96,7 @@ export const ProductsPage = () => {
         rowCount={products?.length || 0}
         rows={products || []}
         getRowId={(row) => row.code}
-        rootProps={{ className: "products-page-list-wrapper" }}
+        rootProps={{ style: { height: "90vh" } }}
         slotProps={{
           footer: {
             getRowCountText(count) {

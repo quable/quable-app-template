@@ -1,4 +1,13 @@
-import { Typography, Stack } from "@mui/material";
+import {
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 import { getCurrentSession } from "@/lib/session";
 
 export default async function SessionDetails() {
@@ -9,50 +18,122 @@ export default async function SessionDetails() {
   }
 
   return (
-    <Stack spacing={1.5}>
-      <Field label="Session ID" value={session.id} />
-      <Field label="User ID" value={session.userId} />
-      <Field label="Data locale" value={session.dataLocale} />
-      <Field label="Interface locale" value={session.interfaceLocale} />
-      <Field label="Quable instance" value={session.quableInstance.name} />
-      <Field
-        label="Document IDs"
-        value={
-          session.documentIds
-            ? JSON.stringify(session.documentIds, null, 2)
-            : "—"
-        }
-        mono
-      />
-      <Field label="Created at" value={formatDate(session.createdAt)} />
-      <Field label="Updated at" value={formatDate(session.updatedAt)} />
-    </Stack>
-  );
-}
-
-function Field({
-  label,
-  value,
-  mono = false,
-}: {
-  label: string;
-  value: React.ReactNode;
-  mono?: boolean;
-}) {
-  return (
-    <Stack direction="row" spacing={1}>
-      <Typography variant="body2" color="text.secondary" sx={{ minWidth: 180 }}>
-        {label}
-      </Typography>
-      <Typography
-        variant="body2"
-        sx={
-          mono ? { fontFamily: "monospace", whiteSpace: "pre-wrap" } : undefined
-        }
-      >
-        {value}
-      </Typography>
-    </Stack>
+    <TableContainer component={Paper} variant="outlined">
+      <Table size="small">
+        <TableHead>
+          <TableRow>
+            <TableCell>
+              <Typography variant="subtitle2" fontWeight="bold">
+                Property
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle2" fontWeight="bold">
+                Value
+              </Typography>
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>
+              <Typography variant="body2" color="text.secondary">
+                Session ID
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="body2">{session.id}</Typography>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Typography variant="body2" color="text.secondary">
+                User ID
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="body2">{session.userId}</Typography>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Typography variant="body2" color="text.secondary">
+                Data locale
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="body2">{session.dataLocale}</Typography>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Typography variant="body2" color="text.secondary">
+                Interface locale
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="body2">{session.interfaceLocale}</Typography>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Typography variant="body2" color="text.secondary">
+                Quable instance
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="body2">
+                {session.quableInstance.name}
+              </Typography>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Typography variant="body2" color="text.secondary">
+                Document IDs
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontFamily: "monospace",
+                  whiteSpace: "pre-wrap",
+                }}
+              >
+                {session.documentIds
+                  ? JSON.stringify(session.documentIds, null, 2)
+                  : "—"}
+              </Typography>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Typography variant="body2" color="text.secondary">
+                Created at
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="body2">
+                {formatDate(session.createdAt)}
+              </Typography>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Typography variant="body2" color="text.secondary">
+                Updated at
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="body2">
+                {formatDate(session.updatedAt)}
+              </Typography>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 

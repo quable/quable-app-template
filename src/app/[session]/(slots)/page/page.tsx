@@ -2,6 +2,7 @@
 
 import { addKeyValue } from "@/lib/actions/key-value";
 import {
+  Box,
   Card,
   CardActions,
   CardContent,
@@ -53,9 +54,16 @@ export default function HomePage() {
     <div className="page-layout">
       <Typography variant="h4">{t("common.app_name")}</Typography>
 
-      <div className="content-wrapper">
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "calc(100vh - 80px)",
+        }}
+      >
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
-          <Card>
+          <Card elevation={2}>
             <CardHeader title={t("configuration.add_key_value")} />
             <CardContent>
               <Grid container spacing={2}>
@@ -107,7 +115,7 @@ export default function HomePage() {
             </CardActions>
           </Card>
         </form>
-      </div>
+      </Box>
     </div>
   );
 }
