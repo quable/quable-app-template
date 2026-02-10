@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "client"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model QuableInstance {
+  id        Int    @id @default(autoincrement())
+  name      String    @unique
+  token     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  sessions  Session[]
+
+  @@map("quable_instance")
+}
+
+model Session {
+  id               String         @id @default(uuid())
+  userId           Int
+  dataLocale       String
+  interfaceLocale  String         @default("en")
+  documentIds      Json?
+  quableInstanceId Int
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  quableInstance   QuableInstance @relation(fields: [quableInstanceId], references: [id], onDelete: Cascade)
+
+  @@index([quableInstanceId], map: "session_quableInstanceId_fkey")
+  @@map("session")
+}

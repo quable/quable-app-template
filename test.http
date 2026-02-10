@@ -1,0 +1,108 @@
+### Variables
+@baseUrl = http://localhost:3000
+@quableInstanceName = demo-instance
+@quableAuthToken = your-auth-token-here
+@sessionId = session-id
+
+### 1. GET /permission
+# Returns app permissions from quable.app.yml
+GET {{baseUrl}}/permission
+
+### 2. POST /install
+# Installs the app on a Quable instance
+# Note: The instance must exist or be created first
+POST {{baseUrl}}/install
+Content-Type: application/json
+
+{
+  "data": {
+    "quableInstanceName": "{{quableInstanceName}}",
+    "quableAuthToken": "{{quableAuthToken}}"
+  }
+}
+
+### 3. GET / (AppStore flow - creates session and redirects)
+# Simulates opening the app from AppStore in PIM
+# Creates a session and redirects to /{sessionId}/page
+GET {{baseUrl}}/?applicationType=AppStore&quableInstanceName={{quableInstanceName}}&interfaceLocale=en-US&dataLocale=fr_FR&userId=1
+
+### 4. POST /?slot=document.action.single
+# Simulates a single document action
+# Returns: { "url": "...", "err": 0 }
+POST {{baseUrl}}/?slot=document.action.single
+Content-Type: application/json
+
+{
+  "data": {
+    "quableInstanceName": "{{quableInstanceName}}",
+    "userId": 1,
+    "dataLocale": "fr_FR",
+    "interfaceLocale": "en-US",
+    "documentIds": ["PROD-001"]
+  }
+}
+
+### 5. POST /?slot=document.action.bulk
+# Simulates a bulk document action
+# Returns: { "url": "...", "err": 0 }
+POST {{baseUrl}}/?slot=document.action.bulk
+Content-Type: application/json
+
+{
+  "data": {
+    "quableInstanceName": "{{quableInstanceName}}",
+    "userId": 1,
+    "dataLocale": "fr_FR",
+    "interfaceLocale": "fr-FR",
+    "documentIds": ["PROD-001", "PROD-002", "PROD-003", "PROD-004"]
+  }
+}
+
+### 6. POST /?slot=document.page.tab
+# Simulates a document page tab
+# Returns: { "url": "...", "err": 0 }
+POST {{baseUrl}}/?slot=document.page.tab
+Content-Type: application/json
+
+{
+  "data": {
+    "quableInstanceName": "{{quableInstanceName}}",
+    "userId": 1,
+    "dataLocale": "en_GB",
+    "interfaceLocale": "en-US",
+    "documentIds": ["DOC-123"]
+  }
+}
+
+### 7. GET /{sessionId}/page
+# Access the default page slot for a session
+# Replace {sessionId} with the ID returned from POST /?slot=x or GET /?applicationType=AppStore
+GET {{baseUrl}}/{{sessionId}}/page
+
+### 8. GET /{sessionId}/document.action.single
+# Access the single action slot page
+# Replace {sessionId} with the ID returned from POST /?slot=document.action.single
+GET {{baseUrl}}/{{sessionId}}/document.action.single
+
+### 9. GET /{sessionId}/document.action.bulk
+# Access the bulk action slot page
+# Replace {sessionId} with the ID returned from POST /?slot=document.action.bulk
+GET {{baseUrl}}/{{sessionId}}/document.action.bulk
+
+### 10. GET /{sessionId}/document.page.tab
+# Access the document page tab slot
+# Replace {sessionId} with the ID returned from POST /?slot=document.page.tab
+GET {{baseUrl}}/{{sessionId}}/document.page.tab
+
+### 11. GET /{sessionId}/product
+# Access the product page
+# Replace {sessionId} with a valid session ID
+GET {{baseUrl}}/{{sessionId}}/product
+
+### 12. GET /readme
+# Access the readme page
+GET {{baseUrl}}/readme
+
+### 13. GET /error
+# Access the error page
+GET {{baseUrl}}/error

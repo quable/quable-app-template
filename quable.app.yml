@@ -1,0 +1,3 @@
+application_type: AppStore
+quable_pim_scope:
+  - full_access

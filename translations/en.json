@@ -1,0 +1,35 @@
+{
+  "common": {
+    "app_name": "Quable App Template",
+    "app_description": "Template for creating QuableApps with React, @quable/ui and Next.js.",
+    "save": "Save",
+    "key_required": "Key is required",
+    "value_required": "Value is required"
+  },
+  "products_page": {
+    "title": "Products",
+    "columns": {
+      "product_name": "Product Name",
+      "product_code": "Product Code",
+      "product_type": "Product Type"
+    },
+    "no_products": "No products found",
+    "no_products_description": "No products found in your PIM.",
+    "footer": {
+      "row_count": "{count, plural, one {# product} other {# products}}"
+    }
+  },
+  "configuration": {
+    "add_key_value": "Add Key Value",
+    "key": "Key",
+    "value": "Value"
+  },
+  "toasts": {
+    "add_key_value_success": "Key value added successfully",
+    "add_key_value_error": "Failed to add key value"
+  },
+  "error": {
+    "title": "Oops! Something went wrong.",
+    "description": "An error occurred while loading the page. Please make you have a valid session id."
+  }
+}
