@@ -14,7 +14,7 @@ A modern Next.js application template for building Quable PIM Platform applicati
 
 ## Prerequisites
 
-- Node.js >= 18.0.0
+- Node.js >= 24.22.1 (see `.nvmrc`)
 - yarn or pnpm >= 9.0.0
 
 ## Quick Start
